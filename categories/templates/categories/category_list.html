@@ -1,0 +1,16 @@
+{% load mptt_tags %}
+
+<ul class="root">
+    {% recursetree object_list %}
+        <li>
+            {{ node.name }} <a href="{% url 'categories:category_delete' node.pk %}">remove</a> <a href="{% url 'categories:category_detail' node.pk %}">detail</a>
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+
+<a href={% url 'categories:category_create' %}>add new Category</a>
