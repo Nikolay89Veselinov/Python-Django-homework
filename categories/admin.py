@@ -17,5 +17,11 @@ class CategoryDraggableMPTTAdmin(DraggableMPTTAdmin):
             instance.name,
         )
 
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 2000:
+            return False
+        else:
+            return True
+
     move_element.short_description = 'move element'
     
